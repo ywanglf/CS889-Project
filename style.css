@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+h3 {
+    font-size: 16px;
+}
+
 .container {
     width: 100%;
     min-height: 100vh;
@@ -20,21 +24,15 @@
     background-color: white;
 }
 
+.mode-selector-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
 .todolist h1 {
     text-align: center;
     font-size: 50px;
-}
-
-.todolist h3 {
-    background-color: #FFD580; 
-    border: 2px solid #FFD580; 
-    border-radius: 15px; 
-    padding: 10px 20px;
-    display: inline-block;
-    font-size: 16px;
-    color: #000;
-    margin-left: 25px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .row {
@@ -47,29 +45,25 @@
 }
   
 .row #task {
-    background-color: #FFD580;
-    border: 2px solid #FFD580;
-    border-radius: 15px;
     padding: 10px 20px;
-    font-size: 16px;
     color: #000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-right: 10px; 
     flex-shrink: 0; 
     cursor: default;
 }
 
 .row #deadline {
-    background-color:#2ACFC2 ;
-    border: 2px solid #2ACFC2 ;
-    border-radius: 15px;
     padding: 10px 20px;
-    font-size: 16px;
     color: #000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-right: 10px; 
     flex-shrink: 0; 
     cursor: default;
+}
+
+.mode-selector-container {
+    h3 {
+        margin-right: 10px;
+    }
 }
 
   
@@ -147,9 +141,21 @@ ul li.checked::before {
     margin-right: 70px;
 }
 
-.progress-container {
+.progress-bar-linear {
     width: 100%;
     height: 10px; 
     position: relative; 
     margin-top: 5px;
+}
+
+.progress-bar-circular {
+    margin: 20px;
+    width: 70px;
+    height: 70px;
+    position: relative;
+}
+
+.progress-bar-container {
+    display: flex;
+    justify-content: flex-end;
 }
