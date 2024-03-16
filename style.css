@@ -110,6 +110,8 @@ ul li {
     user-select: none;
     cursor: pointer;
     position: relative;
+    border: 2px solid #FFD580;
+    border-radius: 20px;
 }
 
 ul li::before {

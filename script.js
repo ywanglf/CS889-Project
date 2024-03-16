@@ -52,7 +52,7 @@ const getLinearBar = (progressBarElement, duration) => {
 
 const getCircularBar = (progressBarElement, duration) => {
     var bar = new ProgressBar.Circle(progressBarElement, {
-        color: '#66B2FF',
+        color: '#FFD580',
         strokeWidth: 8,
         trailWidth: 8,
         easing: 'easeInOut',
@@ -123,7 +123,7 @@ const barFunctions = {
     [Modes.linear]: getLinearBar
 }
 
-var currentMode = Modes.linear;
+var currentMode = Modes.circular;
 
 const startProgressBar = (progressBarElement, duration) => {
     const bar = barFunctions[currentMode](progressBarElement, duration);
@@ -143,3 +143,4 @@ tasks_list.addEventListener("click", (e) => {
 
 document.getElementById("date-picker").value = getCurrentDate();
 document.getElementById("time-picker").value = getCurrentTime();
+document.getElementById('mode-selector').value = currentMode;
