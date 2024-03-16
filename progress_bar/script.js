@@ -1,5 +1,5 @@
-const input = document.getElementById("input-box");
-const list = document.getElementById("list-container");
+const task_description_input = document.getElementById("input-box");
+const tasks_list = document.getElementById("list-container");
 
 const getCurrentDate = () => {
     let currentDate = new Date();
@@ -10,76 +10,73 @@ const getCurrentDate = () => {
 }
 
 const getCurrentTime = () => {
-    const currentTime = new Date();
-    const hours = String(currentTime.getHours()+1).padStart(2, '0'); 
+    const currentDate = new Date();
+    const hours = String(currentDate.getHours() + 1).padStart(2, '0'); 
     return `${hours}:00`;
 }
 
 const create = () => {
-    if (input.value != "") {
-        let li = document.createElement("li");
-        let div = document.createElement("div");
-        let span = document.createElement("span");
+    if (task_description_input.value != "") {
+        const dateValue = document.getElementById('date-picker').value;
+        const timeValue = document.getElementById('time-picker').value;
+        const deadlineDate = new Date(dateValue + 'T' + timeValue);
+        const currentDate = new Date();
+        const duration = deadlineDate - currentDate;
 
-        var dateValue = document.getElementById('date-picker').value;
-        var timeValue = document.getElementById('time-picker').value;
-        var deadline = new Date(dateValue+'T'+timeValue);
-        var now = new Date();
-        var duration = deadline - now;
+        const deadlineIndicator = document.createElement("span");
+        deadlineIndicator.className = "item-deadline";
+        const formatOptions = { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false };
+        deadlineIndicator.innerHTML = new Intl.DateTimeFormat('en-US', formatOptions).format(deadlineDate);
+        
+        const progressBarElement = document.createElement("div");
+        progressBarElement.className = "progress-container";
+        progressBarElement.id = `progress-container-${currentDate}`
 
-        span.className = "item-deadline";
-        const options = { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false };
-        const formatter = new Intl.DateTimeFormat('en-US', options);
-        span.innerHTML = formatter.format(deadline);
+        const task = document.createElement("li");
+        task.innerHTML = task_description_input.value;
+        task.appendChild(deadlineIndicator)
+        task.appendChild(progressBarElement);
+        tasks_list.appendChild(task);
 
-        div.className = "progress-container";
-        div.id = "progress-container-"+now
-        li.innerHTML = input.value;
-        li.appendChild(span)
-        li.appendChild(div);
-        list.appendChild(li);
-
-        initiateProgressBar(now, duration)
+        initiateProgressBar(progressBarElement, duration)
     }
 }
 
-const initiateProgressBar = (now, duration) => {
-    var container = document.getElementById('progress-container-' + now);
-    var bar = new ProgressBar.Line(container, {
-    strokeWidth: 10,
-    easing: 'linear',
-    duration: duration,
-    color: '#C2FD4F',
-    trailColor: '#eee',
-    trailWidth: 1,
-    svgStyle: { width: '93%', height: '100%' },
-    text: {
-        style: {
-            color: '#BFBDBD',
-            position: 'absolute',
-            right: '0',
-            top: '0px',
-            padding: 0,
-            margin: 0,
-            transform: null
+const initiateProgressBar = (progressBarElement, duration) => {
+    const bar = new ProgressBar.Line(progressBarElement, {
+        strokeWidth: 10,
+        easing: 'linear',
+        duration: duration,
+        color: '#C2FD4F',
+        trailColor: '#eee',
+        trailWidth: 1,
+        svgStyle: { width: '93%', height: '100%' },
+        text: {
+            style: {
+                color: '#BFBDBD',
+                position: 'absolute',
+                right: '0',
+                top: '0px',
+                padding: 0,
+                margin: 0,
+                transform: null
+            },
+            autoStyleContainer: false
         },
-        autoStyleContainer: false
-    },
-    from: {color: '#C2FD4F'},
-    to: {color: '#F44C32'},
-    step: (state, bar) => {
-        bar.path.setAttribute('stroke', state.color);
-        bar.setText(Math.round(bar.value() * 100) + ' %');
-        if(container.parentElement.classList == "checked") {
-            bar.stop();
+        from: {color: '#C2FD4F'},
+        to: {color: '#F44C32'},
+        step: (state, bar) => {
+            bar.path.setAttribute('stroke', state.color);
+            bar.setText(Math.round(bar.value() * 100) + ' %');
+            if(progressBarElement.parentElement.classList == "checked") {
+                bar.stop();
+            }
         }
-    }
-  });
-
-  bar.animate(1.0)
+    });
+    bar.animate(1.0)
 }
 
-list.addEventListener("click", function(e) {
+tasks_list.addEventListener("click", (e) => {
     if (e.target.tagName == "LI") {
         e.target.classList.toggle("checked");
     }
