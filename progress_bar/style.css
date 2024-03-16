@@ -1,19 +1,18 @@
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
 }
 
-.container{
+.container {
     width: 100%;
     min-height: 100vh;
     padding: 30px;
     background-color: #FDFCE1;
 }
 
-.todolist{
-    width: 100%;
+.todolist {
     max-width: 75%;
     margin: 10px auto 20px;
     padding: 10px 30px 70px;
@@ -41,14 +40,10 @@
 .row {
     display: flex;
     align-items: center; 
-    padding: 10px; 
-    padding-bottom: 0;
-    padding-top: 0;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    margin-left: 25px;
-    margin-right: 25px;
+    padding: 0 10px 0;
+    margin: 25px;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
   
 .row #task {
@@ -97,6 +92,7 @@
 
 .date-time-wrapper {
     display: flex;
+    flex-wrap: wrap;
   }
 
 button {
@@ -156,4 +152,4 @@ ul li.checked::before {
     height: 10px; 
     position: relative; 
     margin-top: 5px;
-  }
+}

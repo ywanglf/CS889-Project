@@ -1,8 +1,21 @@
-// var ProgressBar = require("progressbar.js")
 const input = document.getElementById("input-box");
 const list = document.getElementById("list-container");
 
-function create() {
+const getCurrentDate = () => {
+    let currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`
+}
+
+const getCurrentTime = () => {
+    const currentTime = new Date();
+    const hours = String(currentTime.getHours()+1).padStart(2, '0'); 
+    return `${hours}:00`;
+}
+
+const create = () => {
     if (input.value != "") {
         let li = document.createElement("li");
         let div = document.createElement("div");
@@ -30,7 +43,7 @@ function create() {
     }
 }
 
-function initiateProgressBar(now, duration) {
+const initiateProgressBar = (now, duration) => {
     var container = document.getElementById('progress-container-' + now);
     var bar = new ProgressBar.Line(container, {
     strokeWidth: 10,
@@ -71,3 +84,6 @@ list.addEventListener("click", function(e) {
         e.target.classList.toggle("checked");
     }
 })
+
+document.getElementById("date-picker").value = getCurrentDate();
+document.getElementById("time-picker").value = getCurrentTime();
