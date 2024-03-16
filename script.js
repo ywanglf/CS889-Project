@@ -68,7 +68,7 @@ const getCircularBar = (progressBarElement, duration) => {
 
             const value = Math.round(circle.value() * 100);
             if (value === 0) circle.setText('');
-            else circle.setText(value);
+            else circle.setText(`${value}%`);
         }
     });
     bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
