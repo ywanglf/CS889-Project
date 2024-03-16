@@ -52,20 +52,26 @@ const getLinearBar = (progressBarElement, duration) => {
 
 const getCircularBar = (progressBarElement, duration) => {
     var bar = new ProgressBar.Circle(progressBarElement, {
-        color: '#aaa',
-        strokeWidth: 4,
-        trailWidth: 1,
+        color: '#66B2FF',
+        strokeWidth: 8,
+        trailWidth: 8,
         easing: 'easeInOut',
         duration: duration,
         text: {
-          autoStyleContainer: false
+          style: {
+            color: '#aaa',
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            padding: 0,
+            margin: 0,
+            transform: {
+                prefix: true,
+                value: 'translate(-50%, -50%)'
+            }
+          }
         },
-        from: { color: '#aaa', width: 1 },
-        to: { color: '#333', width: 4 },
         step: (state, circle) => {
-            circle.path.setAttribute('stroke', state.color);
-            circle.path.setAttribute('stroke-width', state.width);
-
             const value = Math.round(circle.value() * 100);
             if (value === 0) circle.setText('');
             else circle.setText(`${value}%`);
