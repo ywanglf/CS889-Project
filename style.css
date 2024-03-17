@@ -122,7 +122,7 @@ ul li::before {
     height: 28px;
     width: 28px;
     border-radius: 50%;
-    background-image: url(unchecked.png);
+    background-image: url(images/unchecked.png);
     background-size: cover;
     background-position: center;
     left: 10px;
@@ -134,7 +134,7 @@ ul li.checked {
 }
 
 ul li.checked::before {
-    background-image: url(checked.png);
+    background-image: url(images/checked.png);
 }
 
 .item-deadline {
@@ -159,12 +159,14 @@ ul li.checked::before {
 }
 
 .progress-bar-bomb {
-    background-image: url(bomb2-ezgif.com-gif-to-sprite-converter.png);
+    background-image: url(images/bomb-sprite-sheet2.png);
     background-repeat: no-repeat;
-    width: 278px; 
-    height: 150px; 
-    background-position: 0px 0;
-    transform: scale(0.7);
+    /* width: 278px; 
+    height: 150px;  */
+    width: 916px; 
+    height: 540px; 
+    background-position: 0 0;
+    transform: scale(0.5);
     transform-origin: top right;
     /* background-size: 278px 150px; */
 }
@@ -176,14 +178,24 @@ ul li.checked::before {
 }
 
 @keyframes burn {
-    0% { background-position: 0px 0; } 
-    100% { background-position: -2780px 0; }
+    0% { background-position: 0px 0px; } 
+    100% { background-position: -43968px 0px; }
 }
 
 @keyframes explode {
-    0% { background-position: -2780px 0; }
-    100% { background-position: -3892px 0; }
+    0% { background-position: -43968px 0px; }
+    100% { background-position: -50400px 0px; }
 }
+
+/* @keyframes burn {
+    0% { background-position: 0px 0px; } 
+    100% { background-position: -2780px 0px; }
+}
+
+@keyframes explode {
+    0% { background-position: -2780px 0px; }
+    100% { background-position: -3892px 0px; }
+} */
 
 @keyframes pop {
     0%, 100% { transform: scale(0.7); }

@@ -1,4 +1,3 @@
-const task_description_input = document.getElementById("input-box");
 const tasks_list = document.getElementById("list-container");
 
 const getCurrentDate = () => {
@@ -84,29 +83,25 @@ const getCircularBar = (progressBarElement, duration) => {
 }
 
 const getBombTimer = (progressBarElement, duration) => {
-    var countdown = duration / 1000;
-    var countdownTimer = setInterval(function() {
-        countdown--;
+    var counter = duration / 1000;
+    var countdownTimer = setInterval(() => {
+        counter--;
 
-        if (countdown === (duration / 1000)-1) { // Start immediately
+        if (counter === (duration / 1000) - 1) { // Start immediately
           progressBarElement.style.animation = `
-            pop 1s ease-in-out infinite, 
-            burn ${duration / 1000}s steps(10) forwards`; 
+            burn ${duration / 1000}s steps(48) forwards`; 
         }
     
-        if (countdown < 3) {
+        if (counter < 1) {
           clearInterval(countdownTimer);
-          progressBarElement.style.animation = 'explode 1s steps(4) forwards'; 
+          progressBarElement.style.animation = 'explode 1s steps(7) forwards'; 
         }
       }, 1000); 
 }
 
-const bombCountDown = () => {
-    const currentDate = new Date();
-    const duration = deadlineDate - currentDate;
-}
-
 const create = () => {
+    const task_description_input = document.getElementById("input-box");
+
     if (task_description_input.value != "") {
         const dateValue = document.getElementById('date-picker').value;
         const timeValue = document.getElementById('time-picker').value;
