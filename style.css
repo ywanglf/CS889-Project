@@ -13,7 +13,7 @@ h3 {
     width: 100%;
     min-height: 100vh;
     padding: 30px;
-    background-color: #FDFCE1;
+    background-color: #F6F6F6;
 }
 
 .todolist {
@@ -21,7 +21,7 @@ h3 {
     margin: 10px auto 20px;
     padding: 10px 30px 70px;
     border-radius: 15px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
 }
 
 .mode-selector-container {
@@ -90,8 +90,9 @@ h3 {
   }
 
 button {
-    background-color:#CF2A5F ;
-    border: 2px solid #CF2A5F ;
+    background-image: linear-gradient(to bottom right, #3773d3, rgb(85, 228, 247));
+    border-radius: 40px;
+    border: transparent ;
     border-radius: 15px;
     padding: 10px 20px;
     font-size: 16px;
@@ -110,8 +111,9 @@ ul li {
     user-select: none;
     cursor: pointer;
     position: relative;
-    border: 2px solid #FFD580;
-    border-radius: 20px;
+    border: 2px solid #113c80;
+    border-radius: 10px;
+    box-shadow: 12px 12px 2px 1px rgba(115, 189, 202, 0.2);
 }
 
 ul li::before {
