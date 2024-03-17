@@ -52,10 +52,10 @@ const getLinearBar = (progressBarElement, duration) => {
 
 const getCircularBar = (progressBarElement, duration) => {
     var bar = new ProgressBar.Circle(progressBarElement, {
-        color: '#FFD580',
+        color: '#04D9FF',
         strokeWidth: 8,
         trailWidth: 8,
-        easing: 'easeInOut',
+        easing: 'linear',
         duration: duration,
         text: {
           style: {
