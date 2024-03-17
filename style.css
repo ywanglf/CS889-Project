@@ -168,7 +168,6 @@ ul li.checked::before {
     background-position: 0 0;
     transform: scale(0.4);
     transform-origin: top right;
-    /* background-size: 278px 150px; */
 }
 
 .progress-bar-container {

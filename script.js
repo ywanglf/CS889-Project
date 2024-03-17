@@ -14,7 +14,7 @@ const getCurrentTime = () => {
     return `${hours}:00`;
 }
 
-const getLinearBar = (progressBarElement, duration) => {
+const showLinearBar = (progressBarElement, duration) => {
     const bar = new ProgressBar.Line(progressBarElement, {
         strokeWidth: 10,
         easing: 'linear',
@@ -46,10 +46,10 @@ const getLinearBar = (progressBarElement, duration) => {
         }
     });
     
-    return bar;
+    bar.animate(1.0);
 }
 
-const getCircularBar = (progressBarElement, duration) => {
+const showCircularBar = (progressBarElement, duration) => {
     var bar = new ProgressBar.Circle(progressBarElement, {
         color: '#04D9FF',
         strokeWidth: 8,
@@ -79,27 +79,77 @@ const getCircularBar = (progressBarElement, duration) => {
     bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
     bar.text.style.fontSize = '1.5rem';
     
-    return bar;
+    bar.animate(1.0);
 }
 
-const getBombTimer = (progressBarElement, duration) => {
+const showBombTimer = (progressBarElement, duration) => {
     var counter = duration / 1000;
     var countdownTimer = setInterval(() => {
         counter--;
 
-        if (counter === (duration / 1000) - 1) { // Start immediately
+        if (counter === (duration / 1000) - 1) {
           progressBarElement.style.animation = `
             burn ${duration / 1000}s steps(48) forwards`; 
         }
     
         if (counter < 1) {
           clearInterval(countdownTimer);
-          progressBarElement.style.animation = 'explode 1s steps(6) forwards'; 
+          progressBarElement.style.animation = 'explode 1s steps(8) forwards'; 
         }
       }, 1000); 
 }
 
-const create = () => {
+const unitsConverter = {
+    secondsInDay: 24 * 60 * 60,
+    secondsInHour: 60 * 60,
+    secondsInMinute: 60,
+}
+
+const convertSecondsToReadableFormat = (seconds) => {
+    const days = Math.floor(seconds / unitsConverter.secondsInDay);
+    seconds -= days * unitsConverter.secondsInDay;
+
+    const hours = Math.floor(seconds / unitsConverter.secondsInHour);
+    seconds -= hours * unitsConverter.secondsInHour;
+
+    const minutes = Math.floor(seconds / unitsConverter.secondsInMinute);
+    seconds -= minutes * unitsConverter.secondsInMinute;
+
+    return {
+        days,
+        hours,
+        minutes,
+        seconds
+    }
+}
+
+const getDownCounterMessage = (secondsRemaining) => {
+    const {days, hours, minutes, seconds} = convertSecondsToReadableFormat(secondsRemaining);
+    
+    let downCounterMessage = "";
+    if (days > 0) downCounterMessage += `${days} days, `;
+    if (hours > 0) downCounterMessage += `${hours} hours, `;
+    if (minutes > 0) downCounterMessage += `${minutes} minutes, `;
+    downCounterMessage += `${seconds} seconds remaining`;
+
+    return downCounterMessage;
+}
+
+const showDownCounter = (progressBarElement, duration) => {
+    let secondsRemaining = Math.floor(duration / 1000);
+
+    const downCounter = setInterval(() => {
+        secondsRemaining -= 1;
+
+        progressBarElement.innerHTML = getDownCounterMessage(secondsRemaining);
+
+        if (secondsRemaining === 0) clearInterval(downCounter);
+    }, 1000)
+    
+    progressBarElement.innerHTML = getDownCounterMessage(secondsRemaining);
+}
+
+const createTask = () => {
     const task_description_input = document.getElementById("input-box");
 
     if (task_description_input.value != "") {
@@ -130,7 +180,7 @@ const create = () => {
         task.appendChild(progressBarContainer);
         tasks_list.appendChild(task);
         
-        startProgressBar(progressBarElement, duration)
+        drawAnimation(progressBarElement, duration)
     }
 }
 
@@ -138,22 +188,20 @@ const Modes = {
     circular: "circular",
     linear: "linear",
     bomb: "bomb",
+    countdown: "countdown"
 }
 
-const barFunctions = {
-    [Modes.circular]: getCircularBar,
-    [Modes.linear]: getLinearBar,
-    [Modes.bomb]: getBombTimer,
+const animationFunctions = {
+    [Modes.circular]: showCircularBar,
+    [Modes.linear]: showLinearBar,
+    [Modes.bomb]: showBombTimer,
+    [Modes.countdown]: showDownCounter
 }
 
-var currentMode = Modes.bomb;
+var currentMode = Modes.countdown;
 
-const startProgressBar = (progressBarElement, duration) => {
-    const bar = barFunctions[currentMode](progressBarElement, duration);
-    if (currentMode != Modes.bomb) {
-        bar.animate(1.0);
-    }
-    
+const drawAnimation = (progressBarElement, duration) => {
+    animationFunctions[currentMode](progressBarElement, duration);
 }
 
 const changeMode = () => {
