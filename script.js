@@ -83,6 +83,29 @@ const getCircularBar = (progressBarElement, duration) => {
     return bar;
 }
 
+const getBombTimer = (progressBarElement, duration) => {
+    var countdown = duration / 1000;
+    var countdownTimer = setInterval(function() {
+        countdown--;
+
+        if (countdown === (duration / 1000)-1) { // Start immediately
+          progressBarElement.style.animation = `
+            pop 1s ease-in-out infinite, 
+            burn ${duration / 1000}s steps(10) forwards`; 
+        }
+    
+        if (countdown < 3) {
+          clearInterval(countdownTimer);
+          progressBarElement.style.animation = 'explode 1s steps(4) forwards'; 
+        }
+      }, 1000); 
+}
+
+const bombCountDown = () => {
+    const currentDate = new Date();
+    const duration = deadlineDate - currentDate;
+}
+
 const create = () => {
     if (task_description_input.value != "") {
         const dateValue = document.getElementById('date-picker').value;
@@ -108,26 +131,31 @@ const create = () => {
         task.appendChild(deadlineIndicator)
         task.appendChild(progressBarContainer);
         tasks_list.appendChild(task);
-
+        
         startProgressBar(progressBarElement, duration)
     }
 }
 
 const Modes = {
     circular: "circular",
-    linear: "linear"
+    linear: "linear",
+    bomb: "bomb",
 }
 
 const barFunctions = {
     [Modes.circular]: getCircularBar,
-    [Modes.linear]: getLinearBar
+    [Modes.linear]: getLinearBar,
+    [Modes.bomb]: getBombTimer,
 }
 
-var currentMode = Modes.circular;
+var currentMode = Modes.bomb;
 
 const startProgressBar = (progressBarElement, duration) => {
     const bar = barFunctions[currentMode](progressBarElement, duration);
-    bar.animate(1.0);
+    if (currentMode != Modes.bomb) {
+        bar.animate(1.0);
+    }
+    
 }
 
 const changeMode = () => {

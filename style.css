@@ -158,8 +158,34 @@ ul li.checked::before {
     position: relative;
 }
 
+.progress-bar-bomb {
+    background-image: url(bomb2-ezgif.com-gif-to-sprite-converter.png);
+    background-repeat: no-repeat;
+    width: 278px; 
+    height: 150px; 
+    background-position: 0px 0;
+    transform: scale(0.7);
+    transform-origin: top right;
+    /* background-size: 278px 150px; */
+}
+
 .progress-bar-container {
     display: flex;
     justify-content: flex-end;
     padding-right: 10px;
+}
+
+@keyframes burn {
+    0% { background-position: 0px 0; } 
+    100% { background-position: -2780px 0; }
+}
+
+@keyframes explode {
+    0% { background-position: -2780px 0; }
+    100% { background-position: -3892px 0; }
+}
+
+@keyframes pop {
+    0%, 100% { transform: scale(0.7); }
+    50% { transform: scale(0.71); } /* Slightly larger than the original size */
 }
