@@ -163,10 +163,10 @@ ul li.checked::before {
     background-repeat: no-repeat;
     /* width: 278px; 
     height: 150px;  */
-    width: 916px; 
+    width: 900px; 
     height: 540px; 
     background-position: 0 0;
-    transform: scale(0.5);
+    transform: scale(0.4);
     transform-origin: top right;
     /* background-size: 278px 150px; */
 }
@@ -177,13 +177,17 @@ ul li.checked::before {
     padding-right: 10px;
 }
 
+.fixHeight {
+    height: 200px;
+}
+
 @keyframes burn {
     0% { background-position: 0px 0px; } 
-    100% { background-position: -43968px 0px; }
+    100% { background-position: -43200px 0px; }
 }
 
 @keyframes explode {
-    0% { background-position: -43968px 0px; }
+    0% { background-position: -43200px 0px; }
     100% { background-position: -50400px 0px; }
 }
 
@@ -198,6 +202,6 @@ ul li.checked::before {
 } */
 
 @keyframes pop {
-    0%, 100% { transform: scale(0.7); }
-    50% { transform: scale(0.71); } /* Slightly larger than the original size */
+    0%, 100% { transform: scale(0.4); }
+    50% { transform: scale(0.41); }
 }

@@ -94,7 +94,7 @@ const getBombTimer = (progressBarElement, duration) => {
     
         if (counter < 1) {
           clearInterval(countdownTimer);
-          progressBarElement.style.animation = 'explode 1s steps(7) forwards'; 
+          progressBarElement.style.animation = 'explode 1s steps(6) forwards'; 
         }
       }, 1000); 
 }
@@ -116,6 +116,9 @@ const create = () => {
         
         const progressBarContainer = document.createElement("div");
         progressBarContainer.className = "progress-bar-container";
+        if (currentMode == Modes.bomb) {
+            progressBarContainer.classList.add("fixHeight");
+        }
         const progressBarElement = document.createElement("div");
         progressBarElement.className = `progress-bar-${currentMode}`;
         progressBarContainer.appendChild(progressBarElement);
