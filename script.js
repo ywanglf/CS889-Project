@@ -1,7 +1,7 @@
 const tasks_list = document.getElementById("list-container");
 
 const getCurrentDate = () => {
-    let currentDate = new Date();
+    const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
     const day = String(currentDate.getDate()).padStart(2, '0');
@@ -50,7 +50,7 @@ const showLinearBar = (progressBarElement, duration) => {
 }
 
 const showCircularBar = (progressBarElement, duration) => {
-    var bar = new ProgressBar.Circle(progressBarElement, {
+    const bar = new ProgressBar.Circle(progressBarElement, {
         color: '#04D9FF',
         strokeWidth: 8,
         trailWidth: 8,
@@ -83,8 +83,8 @@ const showCircularBar = (progressBarElement, duration) => {
 }
 
 const showBombTimer = (progressBarElement, duration) => {
-    var counter = duration / 1000;
-    var countdownTimer = setInterval(() => {
+    let counter = duration / 1000;
+    let countdownTimer = setInterval(() => {
         counter--;
 
         if (counter === (duration / 1000) - 1) {
@@ -96,7 +96,7 @@ const showBombTimer = (progressBarElement, duration) => {
           clearInterval(countdownTimer);
           progressBarElement.style.animation = 'explode 1s steps(8) forwards'; 
         }
-      }, 1000); 
+    }, 1000); 
 }
 
 const showDownCounter = (progressBarElement, duration) => {
@@ -158,7 +158,7 @@ const animationFunctions = {
     [Modes.countdown]: showDownCounter
 }
 
-var currentMode = Modes.countdown;
+let currentMode = Modes.countdown;
 
 const drawAnimation = (progressBarElement, duration) => {
     animationFunctions[currentMode](progressBarElement, duration);
