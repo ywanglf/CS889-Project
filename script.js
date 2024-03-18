@@ -136,17 +136,13 @@ const getDownCounterMessage = (secondsRemaining) => {
 }
 
 const showDownCounter = (progressBarElement, duration) => {
-    let secondsRemaining = Math.floor(duration / 1000);
-
-    const downCounter = setInterval(() => {
-        secondsRemaining -= 1;
-
-        progressBarElement.innerHTML = getDownCounterMessage(secondsRemaining);
-
-        if (secondsRemaining === 0) clearInterval(downCounter);
-    }, 1000)
+    const deadlineInUnixTime = Math.floor((duration + Date.now()) / 1000);
+    const numOfPreviosDownCounters = document.querySelectorAll('[id^="flipdown-"]').length;
+    const newCounterId = `flipdown-${numOfPreviosDownCounters}`;
     
-    progressBarElement.innerHTML = getDownCounterMessage(secondsRemaining);
+    progressBarElement.id = newCounterId;
+    progressBarElement.classList.add('flipdown');
+    new FlipDown(deadlineInUnixTime, newCounterId).start();
 }
 
 const createTask = () => {
