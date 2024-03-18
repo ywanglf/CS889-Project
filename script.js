@@ -145,6 +145,7 @@ const createTask = () => {
 }
 
 const Modes = {
+    textual: "textual",
     circular: "circular",
     linear: "linear",
     bomb: "bomb",
