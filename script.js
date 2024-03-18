@@ -99,42 +99,6 @@ const showBombTimer = (progressBarElement, duration) => {
       }, 1000); 
 }
 
-const unitsConverter = {
-    secondsInDay: 24 * 60 * 60,
-    secondsInHour: 60 * 60,
-    secondsInMinute: 60,
-}
-
-const convertSecondsToReadableFormat = (seconds) => {
-    const days = Math.floor(seconds / unitsConverter.secondsInDay);
-    seconds -= days * unitsConverter.secondsInDay;
-
-    const hours = Math.floor(seconds / unitsConverter.secondsInHour);
-    seconds -= hours * unitsConverter.secondsInHour;
-
-    const minutes = Math.floor(seconds / unitsConverter.secondsInMinute);
-    seconds -= minutes * unitsConverter.secondsInMinute;
-
-    return {
-        days,
-        hours,
-        minutes,
-        seconds
-    }
-}
-
-const getDownCounterMessage = (secondsRemaining) => {
-    const {days, hours, minutes, seconds} = convertSecondsToReadableFormat(secondsRemaining);
-    
-    let downCounterMessage = "";
-    if (days > 0) downCounterMessage += `${days} days, `;
-    if (hours > 0) downCounterMessage += `${hours} hours, `;
-    if (minutes > 0) downCounterMessage += `${minutes} minutes, `;
-    downCounterMessage += `${seconds} seconds remaining`;
-
-    return downCounterMessage;
-}
-
 const showDownCounter = (progressBarElement, duration) => {
     const deadlineInUnixTime = Math.floor((duration + Date.now()) / 1000);
     const numOfPreviosDownCounters = document.querySelectorAll('[id^="flipdown-"]').length;
